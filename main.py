@@ -81,7 +81,7 @@ for row in final_dataframe.index:
     change_col = f'{time_period} Return'
     percent_col = f'{time_period} Percentile'
 
-    final_dataframe.loc[row, percent_col] = pos(final_dataframe[change_col], final_dataframe.loc[row, change_col])
+    final_dataframe.loc[row, percent_col] = pos(final_dataframe[change_col], final_dataframe.loc[row, change_col]) / 100
 
     momentum_percentiles.append(final_dataframe.loc[row, percent_col])
     final_dataframe.loc[row, 'HQM Score'] = mean(momentum_percentiles)
@@ -162,3 +162,5 @@ for column in column_formats.keys():
   writer.sheets['Recommended Trades'].write(f'{column}1', column_formats[column][0], column_formats[column][1])
 
 writer.save()
+
+print('Report created')
